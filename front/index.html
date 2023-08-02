@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="frontApp" lang="pt-BR">
+    <header>
+        <script src="node_modules/angular/angular.js"></script>
+        <script src="node_modules/angular-route/angular-route.js"></script>
+
+        <link rel="stylesheet" href="index.css"> <!-- Adding custom CSS -->
+
+        <!-- AngularJS Material CSS -->
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.12/angular-material.min.css">
+
+        <!-- AngularJS Material dependencies -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular-animate.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular-aria.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular-messages.min.js"></script>
+
+        <!-- AngularJS Material Javascript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.12/angular-material.min.js"></script>
+
+        <script src="app.js"></script>
+        <script src="services/regService.js"></script>
+        <script src="controllers/listController.js"></script>
+        <script src="controllers/formController.js"></script>
+    </header>
+    <head>
+        <title>Desafio ECG</title>
+    </head>
+    <body>
+        <md-content>
+            <md-tabs md-dynamic-height md-border-bottom>
+                <md-tab label="Cadastros" md-on-select="navigate('/')"></md-tab>
+                <md-tab label="Cadastrar" md-on-select="navigate('/new')"></md-tab>
+            </md-tabs>
+            <div ng-view></div>
+        </md-content>
+    </body>
+</html>

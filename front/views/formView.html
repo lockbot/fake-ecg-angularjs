@@ -1,0 +1,27 @@
+<md-content layout-padding>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Cadastrar</h2>
+        </div>
+    </md-toolbar>
+
+    <form ng-submit="submitForm()" layout="column">
+        <md-input-container>
+            <label>Nome</label>
+            <input type="text" ng-model="reg.name" required>
+        </md-input-container>
+        <md-input-container>
+            <label>Data de Nascimento</label>
+            <input type="date" ng-model="reg.birth" required>
+        </md-input-container>
+        <md-input-container>
+            <label>CPF</label>
+            <input type="text" ng-model="reg.cpf" required>
+        </md-input-container>
+        <md-input-container>
+            <label>Telefone</label>
+            <input type="text" ng-model="reg.phone" required>
+        </md-input-container>
+        <md-button type="submit" class="md-raised md-primary">Cadastrar</md-button>
+    </form>
+</md-content>

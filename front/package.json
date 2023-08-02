@@ -1,0 +1,30 @@
+{
+  "name": "fake-ecg-front",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "karma start karma.conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lockbot/fake-ecg-angularjs.git"
+  },
+  "author": "keybotoDev",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/lockbot/fake-ecg-angularjs/issues"
+  },
+  "homepage": "https://github.com/lockbot/fake-ecg-angularjs#readme",
+  "dependencies": {
+    "angular": "^1.8.3",
+    "angular-route": "^1.8.3"
+  },
+  "devDependencies": {
+    "jasmine-core": "^5.1.0",
+    "karma": "^6.4.2",
+    "karma-chrome-launcher": "^3.2.0",
+    "karma-cli": "^2.0.0",
+    "karma-jasmine": "^5.1.0"
+  }
+}
