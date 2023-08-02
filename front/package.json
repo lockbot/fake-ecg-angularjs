@@ -6,10 +6,7 @@
   "scripts": {
     "test": "karma start karma.conf.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lockbot/fake-ecg-angularjs.git"
-  },
+  "repository": "https://github.com/lockbot/fake-ecg-angularjs.git",
   "author": "keybotoDev",
   "license": "GPL-3.0-or-later",
   "bugs": {
