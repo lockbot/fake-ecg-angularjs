@@ -5,9 +5,7 @@ Fake ECG project in angularjs nodejs and postgreSQL
 ![ecg_db](ecg_db.png)
 
 ## Demo
-https://drive.google.com/file/d/1_878roeU_hJPNIUDepr8CehWXfrg0Y57/view?usp=sharing&type=video.mp4
-
-Sure, here is an example of how you can write instructions in your README.md file:
+https://drive.google.com/file/d/1_878roeU_hJPNIUDepr8CehWXfrg0Y57/preview
 
 # Environment Setup
 
@@ -58,13 +56,7 @@ The application consists of two main parts, the backend server, and the frontend
 
 The backend of the application consists of a Node.js server using HTTP methods through Express and WebSocket with ws.
 
-From the root of the project directory, you can start the backend by running:
-
-```bash
-node back/ws_app.js
-```
-
-Alternatively, you can navigate to the `back` directory and run:
+From the root of the project directory, to start the backend, first navigate to the `back` directory and run:
 
 ```bash
 cd back
