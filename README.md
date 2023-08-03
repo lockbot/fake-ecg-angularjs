@@ -23,10 +23,6 @@ This application uses the following environment variables for configuration with
 
 - **POSTGRES_PASSWORD:** The password for your Postgres database account.
 
-## How to set environment variables
-
-Sure, here is a modified version of the instructions that specifies using a `.env` file.
-
 ## Creating a `.env` File
 
 To set these environment variables:
