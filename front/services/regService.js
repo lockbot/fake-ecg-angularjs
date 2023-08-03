@@ -7,7 +7,7 @@ angular.module('frontApp').service('RegService', ['$http', function($http) {
     return $http.get('http://localhost:3000/' + cpf);
   };
 
-  this.create = function(reg) {
-    return $http.post('http://localhost:3000/', reg);
+  this.create = function(regis) {
+    return $http.post('http://localhost:3000/', regis);
   };
 }]);

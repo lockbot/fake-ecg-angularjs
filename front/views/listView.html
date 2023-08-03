@@ -21,11 +21,11 @@
                 </tr>
             </thead>
             <tbody md-body>
-                <tr md-row ng-repeat="reg in regs | filter:search">
-                    <td md-cell class="col-name">{{reg.name}}</td>
-                    <td md-cell class="col-birth">{{reg.birth | date:'dd/MM/yyyy'}}</td>
-                    <td md-cell class="col-cpf">{{reg.cpf}}</td>
-                    <td md-cell class="col-phone">{{reg.phone}}</td>
+                <tr md-row ng-repeat="regis in regises | filter:search" ng-click="goToExams(regis)">
+                    <td md-cell class="col-name">{{regis.name}}</td>
+                    <td md-cell class="col-birth">{{regis.birth | date:'dd/MM/yyyy'}}</td>
+                    <td md-cell class="col-cpf">{{regis.cpf}}</td>
+                    <td md-cell class="col-phone">{{regis.phone}}</td>
                 </tr>
             </tbody>
         </table>

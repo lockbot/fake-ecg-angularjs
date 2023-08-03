@@ -66,4 +66,66 @@ app.post('/', (req, res) => {
   });
 });
 
-app.listen(3000, () => console.log('Listening on port 3000'));
+app.post('/ecg/:cpf', (req, res) => {
+  init_schema().then(() => {
+    // first value is from :cpf ecg_data from the body and ecg_date current date
+    db.any('INSERT INTO ecg_display(cpf, ecg_data, ecg_date) VALUES($1, $2, CURRENT_TIMESTAMP) RETURNING *',
+      [req.params.cpf, req.body.ecg_data])
+      .then(data => {
+        res.json(data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        res.status(500).json({error: 'An error occurred while inserting ecg_display.'});
+      });
+  });
+});
+
+// Define a separate function that fetches ECG data
+const fetchEcgData = (cpf) => {
+  return init_schema().then(() => {
+    return db.one('SELECT * FROM ecg_display WHERE cpf = $1', cpf)
+      .then(data => {
+        return Promise.resolve(data);
+      })
+      .catch(error => {
+        if (error.code === pgp.errors.queryResultErrorCode.noData) {
+          // post it full of 0s, considering ecg_data int[5][20][5]
+          db.any('INSERT INTO ecg_display(cpf, ecg_data, ecg_date) VALUES($1, $2, CURRENT_TIMESTAMP) RETURNING *',
+            [cpf, Array(5).fill(Array(20).fill(Array(5).fill(0)))]);
+          return Promise.resolve({ecg_data: Array(5).fill(Array(20).fill(Array(5).fill(0)))});
+        } else {
+          console.error('Error:', error);
+          return Promise.reject({error: 'An error occurred while retrieving or inserting ecg_display.'});
+        }
+      });
+  });
+};
+
+// Insert ECG data
+const updateEcgData = (cpf, ecg_data) => {
+  return init_schema().then(() => {
+    return db.any(
+      `UPDATE ecg_display SET ecg_data = $2, ecg_date = CURRENT_TIMESTAMP WHERE cpf = $1 RETURNING *`,
+      [cpf, ecg_data]
+    )
+      .then(data => {
+        return Promise.resolve(data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        return Promise.reject({error: 'An error occurred while updating ecg_display.'});
+      });
+  });
+};
+
+module.exports = {
+  app,
+  handlers: {
+    fetchEcgData,
+    updateEcgData,
+  }
+};
+
+// app.listen(3000, () => console.log('Listening on port 3000'));
+// we call it in ws_app.js

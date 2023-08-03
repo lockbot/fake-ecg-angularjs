@@ -11,7 +11,7 @@ create table if not exists regis (
 
 create table if not exists ecg_display (
     cpf char(11) primary key,
-    ecg_data int[20][5] not null,
+    ecg_data int[5][20][5] not null,
     ecg_date timestamp not null,
-    foreign key (cpf) references regis(cpf)
+    constraint fk_cpf foreign key (cpf) references regis(cpf)
 );

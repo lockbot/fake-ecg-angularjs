@@ -1,0 +1,48 @@
+<md-content layout-padding>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Exams - {{regis.name}}</h2>
+            <md-button class="md-icon-button" aria-label="Back" ng-click="leaveExam()">
+                <md-icon>arrow_back</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-card>
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">Registration Information</span>
+            </md-card-title-text>
+        </md-card-title>
+
+        <md-card-content layout="column">
+            <div>
+                <strong>Nome:</strong> {{regis.name}}
+            </div>
+            <div>
+                <strong>Data de Nascimento:</strong> {{regis.birth | date:'dd/MM/yyyy'}}
+            </div>
+            <div>
+                <strong>CPF:</strong> {{regis.cpf}}
+            </div>
+            <div>
+                <strong>Telefone:</strong> {{regis.phone}}
+            </div>
+        </md-card-content>
+    </md-card>
+
+    <md-card>
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">ECG Graph</span>
+            </md-card-title-text>
+        </md-card-title>
+
+        <md-card-content ng-repeat="ecg in ecg_data track by $index">
+            <div class="ecg-graph" style="width: 800px; height: 200px; background: black;">
+                <canvas id="ecgGraph{{$index}}" width="200" height="50"></canvas>
+            </div>
+        </md-card-content>
+    </md-card>
+</md-content>
+git commit -m "feat: websocket + graph.js"

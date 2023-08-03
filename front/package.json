@@ -14,7 +14,7 @@
   },
   "homepage": "https://github.com/lockbot/fake-ecg-angularjs#readme",
   "dependencies": {
-    "angular": "^1.8.3",
+    "angular": "^1.6.10",
     "angular-route": "^1.8.3"
   },
   "devDependencies": {

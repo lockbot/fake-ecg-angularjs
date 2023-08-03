@@ -1,14 +1,13 @@
-angular.module('frontApp').controller('FormController', ['$scope', 'RegService', '$location', function($scope, RegService, $location) {
-  $scope.reg = {
+angular.module('frontApp').controller('FormController', ['$scope', 'RegService', function($scope, RegService) {
+  $scope.regis = {
     name: '',
-    birth: '',
+    birth: new Date,
     cpf: '',
     phone: ''
   };
 
   $scope.submitForm = function() {
-    RegService.create($scope.reg).then(function(response) {
-      $location.path('/');  // Redirect to the list page after successful creation.
+    RegService.create($scope.regis).then(function(response) {
     }, function(error) {
       console.error(error);
     });

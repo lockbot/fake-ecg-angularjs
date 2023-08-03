@@ -9,6 +9,10 @@ angular.module('frontApp', ['ngRoute', 'ngMaterial'])
         templateUrl: 'views/formView.html',
         controller: 'FormController'
       })
+      .when('/exams/:cpf', {
+        templateUrl: 'views/examsView.html',
+        controller: 'ExamsController'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -27,6 +31,18 @@ angular.module('frontApp', ['ngRoute', 'ngMaterial'])
         }
       };
   }])
+  .service('SharedDataService', function() {
+    var sharedData = {};
+
+    return {
+      get: function() {
+        return sharedData;
+      },
+      set: function(value) {
+        sharedData = value;
+      }
+    }
+  })
   .run(['$rootScope', '$location', function($rootScope, $location) {
     $rootScope.navigate = function(url) {
       $location.path(url);
