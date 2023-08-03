@@ -91,9 +91,10 @@ const fetchEcgData = (cpf) => {
       .catch(error => {
         if (error.code === pgp.errors.queryResultErrorCode.noData) {
           // post it full of 0s, considering ecg_data int[5][20][5]
+          let new_ecg_data = Array.from({length: 5}, () => Array.from({length: 20}, () => Array.from({length: 5}, () => 0)))
           db.any('INSERT INTO ecg_display(cpf, ecg_data, ecg_date) VALUES($1, $2, CURRENT_TIMESTAMP) RETURNING *',
-            [cpf, Array(5).fill(Array(20).fill(Array(5).fill(0)))]);
-          return Promise.resolve({ecg_data: Array(5).fill(Array(20).fill(Array(5).fill(0)))});
+            [cpf, new_ecg_data]);
+          return Promise.resolve({ecg_data: new_ecg_data});
         } else {
           console.error('Error:', error);
           return Promise.reject({error: 'An error occurred while retrieving or inserting ecg_display.'});

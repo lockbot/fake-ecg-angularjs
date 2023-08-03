@@ -13,12 +13,15 @@ wss.on('connection', ws => {
     cpf = JSON.parse(message).cpf;
     handlers.fetchEcgData(cpf)
       .then(fetched_data => {
-        let all_data = fetched_data.ecg_data /*: int[20][5]*/;
+        let all_data = fetched_data.ecg_data /*: int[5][20][5]*/;
 
         let myTimer = setInterval(() => {
-          for(let data of all_data) {
+          all_data.map(data => {
+            // let data = dt.map(function(col) {
+            //   return col.slice();
+            // });
             new_i = Math.floor(Math.random() * 5)
-            last_column = Array(5).fill(0);
+            last_column = Array.from({length: 5}, () => 0);
             for (let j = 0; j < 5; j++) {
               last_column[j] = (128 !== (data[19][j] & 128)) ? data[19][j] << 1 : 0;
             }
@@ -39,7 +42,10 @@ wss.on('connection', ws => {
               console.log()
             }
             console.log()
-          }
+
+            // finally running step by step
+            return data.slice();
+          });
           console.log('__________________________')
           // console.log(JSON.stringify(all_data));
 
