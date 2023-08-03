@@ -5,7 +5,7 @@ angular.module('frontApp').controller('ExamsController', ['$scope', 'RegService'
 
   let charts = new Array(5);
 
-  const ws = new WebSocket('ws://localhost:8080');
+  const ws = new WebSocket('ws://localhost:8008');
 
   ws.onopen = function() {
     ws.send(JSON.stringify({cpf: $scope.regis.cpf}));
