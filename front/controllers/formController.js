@@ -1,4 +1,4 @@
-angular.module('frontApp').controller('FormController', ['$scope', 'RegService', function($scope, RegService) {
+angular.module('frontApp').controller('FormController', ['$scope', 'RegService', '$location', function($scope, RegService, $location) {
   $scope.regis = {
     name: '',
     birth: new Date,
@@ -7,9 +7,11 @@ angular.module('frontApp').controller('FormController', ['$scope', 'RegService',
   };
 
   $scope.submitForm = function() {
-    RegService.create($scope.regis).then(function(response) {
-    }, function(error) {
-      console.error(error);
-    });
+    RegService.create($scope.regis)
+      .then(function(response) {
+        $location.path('/');
+      }, function(error) {
+        console.error(error);
+      });
   };
 }]);

@@ -16,7 +16,6 @@ angular.module('frontApp', ['ngRoute', 'ngMaterial'])
       .otherwise({
         redirectTo: '/'
       });
-      // Configuring the theme
       $mdThemingProvider.theme('default')
         .primaryPalette('red');
       $mdDateLocaleProvider.formatDate = function(date) {
@@ -44,7 +43,19 @@ angular.module('frontApp', ['ngRoute', 'ngMaterial'])
     }
   })
   .run(['$rootScope', '$location', function($rootScope, $location) {
+    $rootScope.selectedIndex = 0;
     $rootScope.navigate = function(url) {
       $location.path(url);
     }
+    $rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
+      let path = $location.path();
+      // Here we manually match the current path with each tab's route
+      if (path  ===  '/') {  // Or any other condition matching your routes
+        $rootScope.selectedIndex = 0;
+      } else if (path  === '/new') {
+        $rootScope.selectedIndex = 1;
+      } else if (path.startsWith('/exams')) {
+        $rootScope.selectedIndex = 2;
+      }
+    });
   }]);

@@ -31,9 +31,10 @@
     </head>
     <body>
         <md-content>
-            <md-tabs md-dynamic-height md-border-bottom>
-                <md-tab label="Cadastros" md-on-select="navigate('/')"></md-tab>
-                <md-tab label="Cadastrar" md-on-select="navigate('/new')"></md-tab>
+            <md-tabs md-dynamic-height md-border-bottom md-selected="selectedIndex">
+                <md-tab label="Cadastros" md-on-select="navigate('/')" value="0"></md-tab>
+                <md-tab label="Cadastrar" md-on-select="navigate('/new')" value="1"></md-tab>
+                <md-tab label="Exame" ng-disabled="{true}" value="2"></md-tab>
             </md-tabs>
             <div ng-view></div>
         </md-content>

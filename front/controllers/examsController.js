@@ -89,7 +89,6 @@ angular.module('frontApp').controller('ExamsController', ['$scope', 'RegService'
 
   $scope.leaveExam = function() {
     ws.close();
-    $location.path('/');  // Add this line to redirect the user
   };
 
   $scope.$on('$routeChangeStart', function(next, current) {
