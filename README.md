@@ -5,7 +5,7 @@ Fake ECG project in angularjs nodejs and postgreSQL
 ![ecg_db](ecg_db.png)
 
 ## Demo
-https://drive.google.com/file/d/1_878roeU_hJPNIUDepr8CehWXfrg0Y57/preview
+[![demo of the challenge](ecg_thumbnail.png)](https://drive.google.com/file/d/1_878roeU_hJPNIUDepr8CehWXfrg0Y57/preview)
 
 # Environment Setup
 
