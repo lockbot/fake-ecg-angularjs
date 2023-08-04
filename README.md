@@ -1,11 +1,39 @@
 # fake-ecg-angularjs
 Fake ECG project in angularjs nodejs and postgreSQL
 
+
 ## Database
 ![ecg_db](ecg_db.png)
 
+
 ## Demo
-[![demo of the challenge](ecg_thumbnail.png)](https://drive.google.com/file/d/1_878roeU_hJPNIUDepr8CehWXfrg0Y57/preview)
+[![demo of the challenge](ecg_thumbnail.gif)](https://drive.google.com/file/d/1_878roeU_hJPNIUDepr8CehWXfrg0Y57/preview)
+
+### ECG Health Application Demonstration
+
+This demonstration presents a unique solution to a web application designed to assist in healthcare scenarios, specifically involving Electrocardiogram (ECG) exams. ECGs are a critical, non-invasive tool for capturing the electrical activity of the heart, allowing healthcare professionals to assess a patient's heart health, diagnose potential issues, and guide treatment plans.
+
+The application comprises three main components:
+
+- User Registration
+- User List
+- ECG Examination Display
+
+#### User Registration
+In the registration section, users can enter their details including their Name, Date of Birth, CPF (a unique identifier akin to a Social Security Number), and Phone Number. These fields come equipped with custom masks and validation to ensure data is entered correctly and consistently.
+
+#### User List
+After registration, users are listed in a comprehensive overview. This interface allows easy access to all registered users and provides a pathway to the ECG Examination Display upon selecting a user.
+
+#### ECG Examination Display
+Upon selecting a user from the list, the ECG Examination Display reveals the user's name, current date, and a live visualization of simulated ECG data. The unique aspect of this demonstration is the way the ECG data is displayed. The application generates and plots five random data points every second, presenting a continuous ECG signal over time.
+
+The ECG graph was intentionally designed to be larger (800px x 200px) for improved visibility and understanding. Furthermore, as the ECG signal moves from one end of the graph to the other, the plot doesn't simply restart but instead intensifies in color and darkness. This nuanced design choice was intended to represent the continuity of heart activity, even as the graphical representation loops back to the beginning.
+
+This approach mirrors the actual functioning of our heartbeats, continuously pumping without interruption. The change in color to a more red hue and the increase in darkness of the line as it loops, represent the strength and vitality of the heart's unending rhythm.
+
+This demonstration doesn't replace professional medical evaluation but showcases an effective way to utilize web technologies in facilitating access to health-related information and services. It is a sample implementation with pre-established requirements, aimed at stimulating discussions on innovative ways to integrate healthcare and technology.
+
 
 # Environment Setup
 
