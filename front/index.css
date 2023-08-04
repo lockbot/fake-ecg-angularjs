@@ -4,3 +4,9 @@
 .col-phone {
     width: 25%;
 }
+
+span.error {
+    color: red;
+    font-size: 0.8em; /* You can adjust this value to match your design */
+    margin-top: 5px;
+}

@@ -1,4 +1,4 @@
-angular.module('frontApp', ['ngRoute', 'ngMaterial'])
+angular.module('frontApp', ['ngRoute', 'ngMask', 'ngMaterial'])
   .config(['$routeProvider', '$mdThemingProvider', '$mdDateLocaleProvider', function($routeProvider, $mdThemingProvider, $mdDateLocaleProvider) {
     $routeProvider
       .when('/', {

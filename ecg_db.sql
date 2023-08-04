@@ -1,17 +1,17 @@
-create schema if not exists ecg_db;
+CREATE SCHEMA IF NOT EXISTS ecg_db;
 
-set search_path to ecg_db;
+SET search_path TO ecg_db;
 
-create table if not exists regis (
-    cpf char(11) primary key,
-    name varchar(100) not null,
-    birth date not null,
-    phone varchar(20)
+CREATE TABLE IF NOT EXISTS regis (
+    cpf CHAR(11) PRIMARY KEY CHECK (length(cpf) = 11),
+    name VARCHAR(150) NOT NULL,
+    birth DATE NOT NULL,
+    phone CHAR(11) CHECK (length(phone) >= 10 AND length(phone) <= 11)
 );
 
-create table if not exists ecg_display (
-    cpf char(11) primary key,
-    ecg_data int[5][20][5] not null,
-    ecg_date timestamp not null,
-    constraint fk_cpf foreign key (cpf) references regis(cpf)
+CREATE TABLE IF NOT EXISTS ecg_display (
+    cpf CHAR(11) PRIMARY KEY,
+    ecg_data INT[5][20][5] NOT NULL,
+    ecg_date TIMESTAMP NOT NULL,
+    CONSTRAINT fk_cpf FOREIGN KEY (cpf) REFERENCES regis(cpf)
 );

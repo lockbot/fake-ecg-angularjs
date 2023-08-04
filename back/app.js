@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const pgp = require('pg-promise')();
 require('dotenv').config();
 
+const { validate } = require('cpf-check');
+
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
@@ -52,7 +54,32 @@ app.get('/:cpf', (req, res) => {
   });
 });
 
+// Validation requirements:
+let namePattern = /^[A-Z\u00C0-\u00DD][a-z\u00DE-\u00FF]+((\'[A-Za-z\u00C0-\u00FF]*\s|\s)?(D?d?e?t?\'?a?o?s?\s)?[A-Z\u00C0-\u00DD][a-z\u00DE-\u00FF]+)+$/;
+
 app.post('/', (req, res) => {
+  // Date validation requirements:
+  let currentDate = new Date();
+  let minDate = new Date();
+  minDate.setFullYear(minDate.getFullYear() - 160);
+  let inputDate = new Date(req.body.birth);
+  // End of date validation requirements.
+  if (!namePattern.test(req.body.name) ||  req.body.name.length > 150 || req.body.name.length < 3) {
+    res.status(400).json({error: 'Invalid name.'});
+    return;
+  }
+  if (inputDate > currentDate || inputDate < minDate) {
+    res.status(400).json({error: 'Invalid birth date.'});
+    return;
+  }
+  if (!validate(req.body.cpf)) {
+    res.status(400).json({error: 'Invalid CPF.'});
+    return;
+  }
+  if (req.body.phone && (req.body.phone.length < 10 || req.body.phone.length > 20)) {
+    res.status(400).json({error: 'Invalid phone number.'});
+    return;
+  }
   init_schema().then(() => {
     db.any('INSERT INTO regis(name, birth, cpf, phone) VALUES($1, $2, $3, $4) RETURNING *',
       [req.body.name, req.body.birth, req.body.cpf, req.body.phone])
