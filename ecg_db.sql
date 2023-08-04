@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS regis (
     cpf CHAR(11) PRIMARY KEY CHECK (length(cpf) = 11),
     name VARCHAR(150) NOT NULL,
     birth DATE NOT NULL,
-    phone CHAR(11) CHECK (length(phone) >= 10 AND length(phone) <= 11)
+    phone VARCHAR(11) CHECK (length(phone) = 0 OR (length(phone) >= 10 AND length(phone) <= 11))
 );
 
 CREATE TABLE IF NOT EXISTS ecg_display (
