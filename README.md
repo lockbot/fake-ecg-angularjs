@@ -9,6 +9,11 @@ Fake ECG project in angularjs nodejs and postgreSQL
 ## Demo
 [![demo of the challenge](ecg_thumbnail.gif)](https://drive.google.com/file/d/1_878roeU_hJPNIUDepr8CehWXfrg0Y57/preview)
 
+<br>
+
+#### <i>Current status of visualisation</i>
+![ecg_current_status](intermediate_improvement.gif)
+
 ### ECG Health Application Demonstration
 
 This demonstration presents a unique solution to a web application designed to assist in healthcare scenarios, specifically involving Electrocardiogram (ECG) exams. ECGs are a critical, non-invasive tool for capturing the electrical activity of the heart, allowing healthcare professionals to assess a patient's heart health, diagnose potential issues, and guide treatment plans.
