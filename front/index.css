@@ -10,3 +10,13 @@ span.error {
     font-size: 0.8em; /* You can adjust this value to match your design */
     margin-top: 5px;
 }
+
+div.flex-cards {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+}
+
+div.flex-card {
+    margin: 10px;
+}

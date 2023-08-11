@@ -30,18 +30,24 @@
             </div>
         </md-card-content>
     </md-card>
+        <md-card>
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">ECG Graph</span>
+                </md-card-title-text>
+            </md-card-title>
 
-    <md-card>
-        <md-card-title>
-            <md-card-title-text>
-                <span class="md-headline">ECG Graph</span>
-            </md-card-title-text>
-        </md-card-title>
+            <md-card-content ng-repeat="_ in ecg_data track by $index">
+                <div class="flex-cards">
+                    <div class="ecg-graph flex-card" style="width: 800px; height: 200px; background: black;">
+                        <canvas id="ecgGraph{{$index}}" width="800" height="200"></canvas>
+                    </div>
 
-        <md-card-content ng-repeat="ecg in ecg_data track by $index">
-            <div class="ecg-graph" style="width: 800px; height: 200px; background: black;">
-                <canvas id="ecgGraph{{$index}}" width="200" height="50"></canvas>
-            </div>
-        </md-card-content>
-    </md-card>
+                    <div class="ecg-graph flex-card" style="width: 200px; height: 50px; background: black;">
+                        <canvas id="ecgGraphEcg{{$index}}" width="200" height="50"></canvas>
+                    </div>
+                </div>
+            </md-card-content>
+        </md-card>
+    </div>
 </md-content>

@@ -16,6 +16,7 @@
   "dependencies": {
     "angular": "^1.8.3",
     "angular-route": "^1.8.3",
+    "d3": "^7.8.5",
     "ng-mask": "^3.1.1"
   },
   "devDependencies": {

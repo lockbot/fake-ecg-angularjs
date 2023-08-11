@@ -65,18 +65,22 @@ app.post('/', (req, res) => {
   let inputDate = new Date(req.body.birth);
   // End of date validation requirements.
   if (!namePattern.test(req.body.name) ||  req.body.name.length > 150 || req.body.name.length < 3) {
+    console.log('\nHTTP code 400: Invalid name.\n');
     res.status(400).json({error: 'Invalid name.'});
     return;
   }
   if (inputDate > currentDate || inputDate < minDate) {
+    console.log('\nHTTP code 400: Invalid birth date.\n');
     res.status(400).json({error: 'Invalid birth date.'});
     return;
   }
   if (!validate(req.body.cpf)) {
+    console.log('\nHTTP code 400: Invalid CPF.\n');
     res.status(400).json({error: 'Invalid CPF.'});
     return;
   }
   if (req.body.phone && (req.body.phone.length < 10 || req.body.phone.length > 20)) {
+    console.log('\nHTTP code 400: Invalid phone number.\n');
     res.status(400).json({error: 'Invalid phone number.'});
     return;
   }
