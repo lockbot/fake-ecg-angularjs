@@ -10,6 +10,18 @@ angular.module('frontApp').controller('ExamsController', ['$scope', 'RegService'
 
   const ws = new WebSocket('ws://localhost:8008');
 
+  // I think there's something here like lifecycle hooks to solve it
+  const svg = d3.select('svg');
+  svg
+    .append('circle')
+    .attr('cx', '50%')
+    .attr('cy', '50%')
+    .attr('r', 40)
+    .attr('fill', 'orange')
+    .transition()
+    .duration(1000)
+    .attr('r', 5);
+
   ws.onopen = function() {
     ws.send(JSON.stringify({cpf: $scope.regis.cpf}));
     $scope.ecg_data.forEach((graph, i) => {
