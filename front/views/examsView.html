@@ -30,33 +30,30 @@
             </div>
         </md-card-content>
     </md-card>
-    <div>
-        <svg width="200" height="50"></svg>
-        <md-card>
-            <md-card-title>
-                <md-card-title-text>
-                    <span class="md-headline">ECG Graph</span>
-                </md-card-title-text>
-            </md-card-title>
+    <md-card>
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">ECG Graph</span>
+            </md-card-title-text>
+        </md-card-title>
 
-            <md-card-content ng-repeat="_ in ecg_data track by $index">
-                <div class="flex-card">
-                    <div class="ecg-graph big-graph">
-                        <canvas id="ecgGraph{{$index}}" width="800" height="200"></canvas>
-                    </div>
-
-                    <div class="ecg-flex-graphs">
-                        <div class="ecg-graph mini-graph">
-                            <canvas id="ecgGraphEcg{{$index}}" width="200" height="50"></canvas>
-                        </div>
-                        <svg width="200" height="50"></svg>
-                        <div class="ecg-graph mini-graph">
-                            <svg width="200" height="50"></svg>
-                        </div>
-                    </div>
-
+        <md-card-content ng-repeat="_ in ecg_data track by $index">
+            <div class="flex-card">
+                <div class="ecg-graph big-graph">
+                    <canvas id="ecgGraph{{$index}}" width="800" height="200"></canvas>
                 </div>
-            </md-card-content>
-        </md-card>
-    </div>
+
+                <div class="ecg-flex-graphs">
+                    <div class="ecg-graph mini-graph">
+                        <canvas id="ecgGraphEcg{{$index}}" width="200" height="50"></canvas>
+                    </div>
+
+                    <div class="ecg-graph mini-graph">
+                        <svg width="200" height="50" d3-svg></svg>
+                    </div>
+                </div>
+
+            </div>
+        </md-card-content>
+    </md-card>
 </md-content>
