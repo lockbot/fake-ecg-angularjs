@@ -11,12 +11,29 @@ span.error {
     margin-top: 5px;
 }
 
-div.flex-cards {
+div.flex-card {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-end;
 }
+div.ecg-flex-graphs {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
-div.flex-card {
+div.ecg-graph {
     margin: 10px;
+    background: black;
+}
+
+div .ecg-graph .big-graph {
+    width: 800px;
+    height: 200px;
+}
+
+div .ecg-graph .mini-graph {
+    width: 200px;
+    height: 50px;
 }
