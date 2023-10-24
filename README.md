@@ -12,7 +12,7 @@ Fake ECG project in angularjs nodejs and postgreSQL
 <br>
 
 #### <i>Current status of visualisation</i>
-![ecg_current_status](intermediate_improvement.gif)
+![ecg_current_status](https://raw.githubusercontent.com/lockbot/fake-ecg-angularjs/main/current_status.mp4)
 
 ### ECG Health Application Demonstration
 
