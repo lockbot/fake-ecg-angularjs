@@ -1,4 +1,5 @@
-angular.module('frontApp').controller('FormController', ['$scope', '$mdDialog', 'RegService', '$location', function($scope, $mdDialog, RegService, $location) {
+angular.module('frontApp')
+  .controller('FormController', ['$scope', '$mdDialog', 'RegService', '$location', function($scope, $mdDialog, RegService, $location) {
   $scope.regis = {
     name: '',
     birth: new Date,

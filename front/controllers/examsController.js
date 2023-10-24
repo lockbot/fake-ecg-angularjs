@@ -1,4 +1,5 @@
-angular.module('frontApp').controller('ExamsController', ['$scope', 'RegService', 'SharedDataService', function($scope, RegService, SharedDataService) {
+angular.module('frontApp')
+  .controller('ExamsController', ['$scope', 'RegService', 'SharedDataService', function($scope, RegService, SharedDataService) {
   $scope.regis = SharedDataService.get();
 
   $scope.ecg_data = Array.from({length: 5}, () => Array.from({length: 8}, () => Array.from({length: 20}, () => 0)));
@@ -10,20 +11,9 @@ angular.module('frontApp').controller('ExamsController', ['$scope', 'RegService'
 
   const ws = new WebSocket('ws://localhost:8008');
 
-  // // I think there's something here like lifecycle hooks to solve it
-  // const svg = d3.select('svg');
-  // svg
-  //   .append('circle')
-  //   .attr('cx', '50%')
-  //   .attr('cy', '50%')
-  //   .attr('r', 40)
-  //   .attr('fill', 'orange')
-  //   .transition()
-  //   .duration(1000)
-  //   .attr('r', 5);
-
   ws.onopen = function() {
     ws.send(JSON.stringify({cpf: $scope.regis.cpf}));
+
     $scope.ecg_data.forEach((graph, i) => {
       let canvas = document.getElementById('ecgGraph' + i);
       if (canvas) {
@@ -161,7 +151,7 @@ angular.module('frontApp').controller('ExamsController', ['$scope', 'RegService'
                   $scope.ecg_data_ecg[i][_100secCount + 1 + j] = 0;
                 }
               } else {
-                for (let j = 0; j < _100secCount - 184; j++) {
+                for (let j = 0; j < _100secCount - 174; j++) {
                   $scope.ecg_data_ecg[i][j] = 0;
                 }
                 for (let j = _100secCount; j < 199; j++) {
@@ -171,6 +161,7 @@ angular.module('frontApp').controller('ExamsController', ['$scope', 'RegService'
 
               if (charts_ecg[i]) {
                 charts_ecg[i].update();
+                $scope.$broadcast(`updateD3${i}`, graph_value);
               }
 
             });
@@ -200,18 +191,125 @@ angular.module('frontApp').controller('ExamsController', ['$scope', 'RegService'
   .directive('d3Svg', function() {
     return {
       restrict: 'A', // A for attribute
-      link: function(scope, element, attrs) {
+      link: function($scope, element, attrs) {
         // element is the jqLite-wrapped element that this directive matches
         const svg = d3.select(element[0]);
 
-        svg.append('circle')
+        // Set up the dimensions of the SVG element
+        const width = 200;
+        const height = 50;
+
+        // Extract the $index from the SVG element's ID
+        const index = parseInt(attrs.id.replace('ecgSvg', ''));
+
+        // Create scales for x and y
+        const xScale = d3.scaleLinear()
+          .domain([0, 199]) // Assuming your data array has 200 points
+          .range([0, width]);
+
+        const yScale = d3.scaleLinear()
+          .domain([0, 4]) // Adjust the domain as needed
+          .range([height, 0]);
+
+        // Create a line generator
+        const line = d3.line()
+          .x(function(d, i) { return xScale(i); })
+          .y(function(d) { return yScale(d); })
+          .curve(d3.curveBasis); // You can choose a different curve type if needed
+
+        // Create an empty path element for the line chart
+        const path = svg.append('path')
+          .attr('fill', 'none')
+          .attr('stroke', 'red')
+          .attr('stroke-width', 1.5);
+
+        // Initialize the data array with zeros
+        const data = Array(200).fill(0);
+
+        // Update the line chart and the circle based on ecgData using a unique event name
+        $scope.$on(`updateD3${index}`, function(event, yValue) {
+          if (yValue !== undefined) {
+            // Push the new Y value to the data array, starting from X=0
+            data.shift();
+            data.push(yValue);
+
+            // Update the path's "d" attribute with the data array
+            path.transition()
+              .duration(50)
+              .attr('d', line(data));
+          }
+        });
+      }
+      // link: function($scope, element, attrs) {
+      //   // element is the jqLite-wrapped element that this directive matches
+      //   const svg = d3.select(element[0]);
+      //
+      //   // Set up the dimensions of the SVG element
+      //   const width = 200;
+      //   const height = 50;
+      //
+      //   // Extract the $index from the SVG element's ID
+      //   const index = parseInt(attrs.id.replace('ecgSvg', ''));
+      //
+      //   // Create scales for x and y
+      //   const xScale = d3.scaleLinear()
+      //     .domain([0, 199]) // Assuming your data array has 200 points
+      //     .range([0, width]);
+      //
+      //   const yScale = d3.scaleLinear()
+      //     .domain([0, 5.5]) // Adjust the domain as needed
+      //     .range([height, 0]);
+      //
+      //   // Create a line generator
+      //   const line = d3.line()
+      //     .x(function(d, i) { return xScale(i); })
+      //     .y(function(d) { return yScale(d); })
+      //     .curve(d3.curveBasis); // You can choose a different curve type if needed
+      //
+      //   // Create an empty path element for the line chart
+      //   const path = svg.append('path')
+      //     .attr('fill', 'none')
+      //     .attr('stroke', 'orange')
+      //     .attr('stroke-width', 1.5);
+      //
+      //   // Update the line chart based on ecgData using a unique event name
+      //   $scope.$on(`updateD3${index}`, function(event, data) {
+      //     if (data) {
+      //       // Update the path's "d" attribute with the data array
+      //       path.transition()
+      //         .duration(50)
+      //         .attr('d', line(data));
+      //     }
+      //   });
+      //   }
+    };
+  })
+  .directive('d3SvgCircle', function() {
+    return {
+      restrict: 'A', // A for attribute
+      link: function ($scope, element, attrs) {
+        //CIRCLE
+        // element is the jqLite-wrapped element that this directive matches
+        const svgCircle = d3.select(element[0]);
+        svgCircle.append('circle')
           .attr('cx', '50%')
           .attr('cy', '50%')
-          .attr('r', 40)
-          .attr('fill', 'orange')
+          .attr('r', 100)
+          .attr('fill', 'steelblue')
           .transition()
           .duration(2500)
-          .attr('r', 5);
+          .attr('r', 0);
+
+        // Extract the $index from the SVG element's ID
+        const indexCircle = parseInt(attrs.id.replace('ecgSvgCircle', ''));
+
+        $scope.$on(`updateD3${indexCircle}`, function (event, data) {
+          svgCircle.select('circle')
+            .transition()
+            .duration(100)
+            .attr('r', data * 5);
+        });
+        // END CIRCLE
       }
     };
   });
