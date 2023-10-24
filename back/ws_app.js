@@ -3,14 +3,17 @@ const WebSocket = require('ws');
 const wss = new WebSocket.Server({ port: 8008 });
 
 const {app, handlers } = require('./app');
+// const { DeviceInstantiate } = require("device/device_utils");
 
 app.listen(3000, () => console.log('Listening on port 3000'));
+
+// await DeviceInstantiate.instantiate(. . .)
 
 wss.on('connection', ws => {
   console.log('New client connected');
 
   ws.on('message', message => {
-    cpf = JSON.parse(message).cpf;
+    let cpf = JSON.parse(message).cpf;
     handlers.fetchEcgData(cpf)
       .then(fetched_data => {
         let all_data = fetched_data.ecg_data /*: int[5][20][5]*/;
